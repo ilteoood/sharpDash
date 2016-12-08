@@ -11,6 +11,13 @@ Today I'm supporting just few of it's functions, only those that operate on Arra
 - drop
 - dropRight
 - fill
+- head
+- indexOf
+- initial
+- intersect
+- join
+- last
+- lastIndexOf
 
 More functions will be added in future.
 

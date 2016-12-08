@@ -82,5 +82,52 @@ namespace sharpDash.Tests
             CollectionAssert.AreEqual(new int[] { 2, 2, 2 }, _.fill(new int[3], 2));
             CollectionAssert.AreEqual(new Object[] { 4, '*', '*', 10 }, _.fill(new Object[] { 4, 6, 8, 10 }, '*', 1, 3));
         }
+
+        [TestMethod()]
+        public void headTest()
+        {
+            Assert.AreEqual(1, _.head(new int[] { 1, 2, 3 }));
+            Assert.AreEqual(0, _.head(new int[] {}));
+        }
+
+        [TestMethod()]
+        public void indexOfTest()
+        {
+            Assert.AreEqual(1, _.indexOf(new int[] { 1, 2, 1, 2 }, 2));
+            Assert.AreEqual(3, _.indexOf(new int[] { 1, 2, 1, 2 }, 2, 2));
+        }
+
+        [TestMethod()]
+        public void initialTest()
+        {
+            CollectionAssert.AreEqual(new int[] { 1, 2 }, _.initial(new int[] { 1, 2, 3 }));
+        }
+
+        [TestMethod()]
+        public void intersectTest()
+        {
+            CollectionAssert.AreEqual(new int[] { 2 }, _.intersect(new int[] { 2, 1 }, new int[] { 2, 3 }));
+        }
+
+        [TestMethod()]
+        public void joinTest()
+        {
+            String manipulated = _.join(new char[] { 'a', 'b', 'c' }, "~");
+            Assert.AreEqual("a~b~c", manipulated);
+        }
+
+        [TestMethod()]
+        public void lastTest()
+        {
+            Assert.AreEqual(3, _.last(new int[] { 1, 2, 3 }));
+        }
+
+        [TestMethod()]
+        public void lastIndexOfTest()
+        {
+            Assert.AreEqual(3, _.lastIndexOf(new int[] { 1, 2, 1, 2 }, 2));
+            Assert.AreEqual(1, _.lastIndexOf(new int[] { 1, 2, 1, 2 }, 2, 2));
+        }
+
     }
 }
