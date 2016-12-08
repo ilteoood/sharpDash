@@ -88,7 +88,7 @@ namespace sharpDash
 
         public static T last<T>(T[] sourceSearch)
         {
-            return sourceSearch[sourceSearch.Length - 1];
+            return sourceSearch.LastOrDefault();
         }
 
         public static int lastIndexOf<T>(T[] sourceSearch, T toSearch, int fromIndex = -1)
@@ -97,6 +97,83 @@ namespace sharpDash
                 fromIndex = sourceSearch.Length;
             IEnumerable<T> whereToSearch = sourceSearch.Take(fromIndex);
             return whereToSearch.ToList<T>().FindLastIndex(element => element.Equals(toSearch));
+        }
+
+        public static T nth<T>(T[] sourceSeach, int n=0)
+        {
+            if (n < 0)
+                n = sourceSeach.Length + n;
+            return sourceSeach[n];
+        }
+
+        public static T[] pull<T>(T[] toPull, params T[] args)
+        {
+            foreach(T arg in args)
+                toPull = difference(toPull, new T[] { arg });
+            return toPull;
+        }
+
+        public static T[] pullAll<T>(T[] toPull, params T[][] args)
+        {
+            foreach (T[] arg in args)
+                toPull = pull(toPull, arg);
+            return toPull;
+        }
+
+        public static T[] pullAt<T>(ref T[] toPull, params int[] indexes)
+        {
+            List<T> toReturn = new List<T>();
+            T[] toReturnArray;
+            foreach (int index in indexes)
+                toReturn.Add(toPull[index]);
+            toReturnArray = toReturn.ToArray();
+            toPull = pull(toPull, toReturnArray);
+            return toReturnArray;
+        }
+
+        public static T[] reverse<T>(ref T[] toReverse)
+        {
+            return toReverse = toReverse.Reverse().ToArray();
+        }
+
+        public static T[] slice<T>(T[] toSlice, int start = 0, int end = -1)
+        {
+            if (end == -1)
+                end = toSlice.Length;
+            return toSlice.Skip(start).Take(end-start).ToArray();
+        }
+
+        public static int sortedIndex(int[] sourceSearch, int value)
+        {
+            return sourceSearch.ToList().FindIndex(element => element <= value) + 1;
+        }
+
+        public static int sortedIndexOf<T>(T[] sourceSearch, T toSearch)
+        {
+            return indexOf(sourceSearch, toSearch);
+        }
+
+        public static int sortedLastIndex(int[] sourceSearch, int value)
+        {
+            return sourceSearch.ToList().FindLastIndex(element => element <= value) + 1;
+        }
+
+        public static int sortedLastIndexOf<T>(T[] sourceSearch, T value)
+        {
+            return lastIndexOf(sourceSearch, value);
+        }
+
+        public static T[] uniq<T>(T[] sourceSearch)
+        {
+            return sourceSearch.Distinct().ToArray();
+        }
+        public static int[] sortedUniq(int[] sourceSearch)
+        {
+            return uniq(sourceSearch);
+        }
+        public static T[] tail<T>(T[] sourceSearch)
+        {
+            return sourceSearch.Skip(1).ToArray();
         }
 
 

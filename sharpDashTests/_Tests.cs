@@ -93,8 +93,9 @@ namespace sharpDash.Tests
         [TestMethod()]
         public void indexOfTest()
         {
-            Assert.AreEqual(1, _.indexOf(new int[] { 1, 2, 1, 2 }, 2));
-            Assert.AreEqual(3, _.indexOf(new int[] { 1, 2, 1, 2 }, 2, 2));
+            int[] tempArray = new int[] { 1, 2, 1, 2 };
+            Assert.AreEqual(1, _.indexOf(tempArray, 2));
+            Assert.AreEqual(3, _.indexOf(tempArray, 2, 2));
         }
 
         [TestMethod()]
@@ -125,8 +126,98 @@ namespace sharpDash.Tests
         [TestMethod()]
         public void lastIndexOfTest()
         {
-            Assert.AreEqual(3, _.lastIndexOf(new int[] { 1, 2, 1, 2 }, 2));
-            Assert.AreEqual(1, _.lastIndexOf(new int[] { 1, 2, 1, 2 }, 2, 2));
+            int[] tempArray = new int[] { 1, 2, 1, 2 };
+            Assert.AreEqual(3, _.lastIndexOf(tempArray, 2));
+            Assert.AreEqual(1, _.lastIndexOf(tempArray, 2, 2));
+        }
+
+        [TestMethod()]
+        public void nthTest()
+        {
+            char[] tempArray = new char[] { 'a', 'b', 'c', 'd' };
+            Assert.AreEqual('b', _.nth(tempArray, 1));
+            Assert.AreEqual('c', _.nth(tempArray, -2));
+        }
+
+        [TestMethod()]
+        public void pullTest()
+        {
+            char[] tempArray = new char[] { 'a', 'b', 'c', 'a', 'b', 'c' };
+            CollectionAssert.AreEqual(new char[] { 'b', 'b' }, _.pull(tempArray, 'a', 'c'));
+        }
+
+        [TestMethod()]
+        public void pullAllTest()
+        {
+            char[] tempArray = new char[] { 'a', 'b', 'c', 'a', 'b', 'c' };
+            CollectionAssert.AreEqual(new char[] { 'b', 'b' }, _.pullAll(tempArray, new char[] { 'a', 'c' }));
+        }
+
+        [TestMethod()]
+        public void pullAtTest()
+        {
+            char[] tempArray = new char[] { 'a', 'b', 'c', 'd' };
+            CollectionAssert.AreEqual(new char[] { 'b', 'd' }, _.pullAt(ref tempArray, new int[] { 1, 3 }));
+            CollectionAssert.AreEqual(new char[] { 'a', 'c' }, tempArray);
+        }
+
+        [TestMethod()]
+        public void reverseTest()
+        {
+            int[] tempArray = new int[] { 1, 2, 3 };
+            CollectionAssert.AreEqual(new int[] { 3, 2, 1 }, _.reverse(ref  tempArray));
+            CollectionAssert.AreEqual(new int[] { 3, 2, 1 }, tempArray);
+        }
+
+        [TestMethod()]
+        public void sliceTest()
+        {
+            int[] tempArray = new int[] { 1, 2, 3 };
+            CollectionAssert.AreEqual(new int[] { 1, 2, 3 }, _.slice(tempArray));
+            CollectionAssert.AreEqual(new int[] { 2, 3 }, _.slice(tempArray, 1));
+            CollectionAssert.AreEqual(new int[] { 2 }, _.slice(tempArray, 1, 2));
+        }
+
+        [TestMethod()]
+        public void sortedIndexTest()
+        {
+            Assert.AreEqual(1, _.sortedIndex(new int[] { 30, 50 }, 40));
+        }
+
+        [TestMethod()]
+        public void sortedIndexOfTest()
+        {
+            Assert.AreEqual(1, _.sortedIndexOf(new int[] { 4, 5, 5, 5, 6 }, 5));
+        }
+
+        [TestMethod()]
+        public void sortedLastIndexTest()
+        {
+            Assert.AreEqual(4, _.sortedLastIndex(new int[] { 4, 5, 5, 5, 6 }, 5));
+        }
+
+        [TestMethod()]
+        public void sortedLastIndexOfTest()
+        {
+            Assert.AreEqual(3, _.sortedLastIndexOf(new int[] { 4, 5, 5, 5, 6 }, 5));
+        }
+
+        [TestMethod()]
+        public void uniqTest()
+        {
+            CollectionAssert.AreEqual(new int[] { 2, 1 }, _.uniq(new int[] { 2, 1, 2 }));
+        }
+
+        [TestMethod()]
+        public void sortedUniqTest()
+        {
+            CollectionAssert.AreEqual(new int[] { 1, 2 }, _.sortedUniq(new int[] { 1, 1, 2 }));
+        }
+
+        [TestMethod()]
+        public void tailTest()
+        {
+            CollectionAssert.AreEqual(new int[] { 2, 3 }, _.tail(new int[] { 1, 2, 3 }));
         }
 
     }

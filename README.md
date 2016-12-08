@@ -18,6 +18,18 @@ Today I'm supporting just few of it's functions, only those that operate on Arra
 - join
 - last
 - lastIndexOf
+- nth
+- pull
+- pullAll
+- pullAt
+- revere
+- slice
+- sortedIndex
+- sortedLastIndex
+- sortedLastIndexOf
+- uniq
+- sortedUniq
+- tail
 
 More functions will be added in future.
 
