@@ -1,0 +1,5 @@
+c:\users\matte\documents\visual studio 2015\Projects\sharpDash\sharpDash\bin\Debug\sharpDash.dll
+c:\users\matte\documents\visual studio 2015\Projects\sharpDash\sharpDash\bin\Debug\sharpDash.pdb
+c:\users\matte\documents\visual studio 2015\Projects\sharpDash\sharpDash\obj\Debug\sharpDash.dll
+c:\users\matte\documents\visual studio 2015\Projects\sharpDash\sharpDash\obj\Debug\sharpDash.pdb
+c:\users\matte\documents\visual studio 2015\Projects\sharpDash\sharpDash\obj\Debug\sharpDash.csprojResolveAssemblyReference.cache
