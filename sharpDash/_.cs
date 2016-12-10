@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,8 @@ namespace sharpDash
 
         public static T[] compact<T>(T[] toCompact)
         {
-            return toCompact.Where(element => !element.Equals(false) && !element.Equals(null) && !element.Equals(0) && !element.Equals("")).ToArray<T>();
+            object[] toAvoid = new object[] { false, null, 0, "" };
+            return toCompact.Where(element => !toAvoid.Contains(element)).ToArray();
         }
 
         public static T[] concat<T>(params T[] args)
@@ -32,7 +34,15 @@ namespace sharpDash
         {
             return toCheck.Where(element => !toExclude.Contains(element)).ToArray();
         }
-        
+
+        public static T[] differenceBy<T>(T[] toCheck, T[] toExclude, Func<T, T> iteratee)
+        {
+            IEnumerable<T> excludeIterated = toExclude.Select(element => iteratee(element));
+            return (from check in toCheck
+                            where !excludeIterated.Contains(iteratee(check))
+                            select check).ToArray();
+        }
+
         public static T[] drop<T>(T[] toDrop, int n = 1)
         {
             return toDrop.Skip(n).ToArray();
@@ -58,6 +68,28 @@ namespace sharpDash
             return head(toHead);
         }
 
+        private static T[] flatterMethod<T>(T[] toFlatten, int maxDeep)
+        {
+            Func<IEnumerable<T>, int, IEnumerable<T>> flatter = null;
+            flatter = (f, curDeep) => f.SelectMany(element => element is Array && (curDeep != maxDeep || maxDeep == 999) ? flatter(((IEnumerable)element).Cast<T>(), curDeep + 1) : Enumerable.Repeat(element, 1));
+            return flatter(toFlatten, 0).ToArray();
+        }
+
+        public static T[] flatten<T>(T[] toFlatten)
+        {
+            return flatterMethod(toFlatten, 1);
+        }
+
+        public static T[] flattenDeep<T>(T[] toFlatten)
+        {
+            return flatterMethod(toFlatten, 999);
+        }
+
+        public static T[] flattenDepth<T>(T[] toFlatten, int depth=1)
+        {
+            return flatterMethod(toFlatten, depth);
+        }
+
         public static T head<T>(T[] toHead)
         {
             return toHead.FirstOrDefault();
@@ -74,10 +106,10 @@ namespace sharpDash
             return dropRight(toInitial);
         }
 
-        public static T[] intersect<T>(params T[][] args)
+        public static T[] intersection<T>(params T[][] args)
         {
             IEnumerable<T> tempEnumerable = args[0];
-            foreach (T[] tempArg in args)
+            foreach (T[] tempArg in args.Skip(1))
                 tempEnumerable = tempEnumerable.Intersect(tempArg);
             return tempEnumerable.ToArray();
         }
@@ -85,7 +117,6 @@ namespace sharpDash
         public static String join<T>(T[] toJoin, String separator = ",")
         {
             String toReturn = "";
-            int arrayLength = toJoin.Length;
             foreach (T element in toJoin)
                 toReturn += element + separator;
             return toReturn.Substring(0, toReturn.LastIndexOf(separator));
@@ -128,10 +159,9 @@ namespace sharpDash
         public static T[] pullAt<T>(ref T[] toPull, params int[] indexes)
         {
             List<T> toReturn = new List<T>();
-            T[] toReturnArray;
             foreach (int index in indexes)
                 toReturn.Add(toPull[index]);
-            toReturnArray = toReturn.ToArray();
+            T[] toReturnArray = toReturn.ToArray();
             pull(ref toPull, toReturnArray);
             return toReturnArray;
         }

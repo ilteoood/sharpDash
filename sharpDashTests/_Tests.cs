@@ -12,7 +12,7 @@ namespace sharpDash.Tests
     public class _Tests
     {
 
-        public bool jaggedAreEquals<T>(T[][] expected, T[][] manipulated)
+        private bool jaggedAreEquals<T>(T[][] expected, T[][] manipulated)
         {
             bool assert = true;
             for (int i = 0; i < expected.Length; i++)
@@ -20,6 +20,7 @@ namespace sharpDash.Tests
                     assert &= expected[i][k].Equals(manipulated[i][k]);
             return assert;
         }
+
         [TestMethod()]
         public void chunkTest()
         {
@@ -58,6 +59,12 @@ namespace sharpDash.Tests
         }
 
         [TestMethod()]
+        public void differenceByTest()
+        {
+            CollectionAssert.AreEqual(new double[] { 1.2 }, _.differenceBy(new double[] { 2.1, 1.2 }, new double[] { 2.3, 3.4 }, Math.Floor));
+        }
+
+        [TestMethod()]
         public void dropTest()
         {
             CollectionAssert.AreEqual(new int[] {2,3}, _.drop(new int[] { 1, 2, 3 }));
@@ -84,6 +91,13 @@ namespace sharpDash.Tests
         }
 
         [TestMethod()]
+        public void flattenDeepTest()
+        {
+            object[] tempArray = new object[] { 1, new object[] { 2, new object[] { 3, new object[] { 4 } }, 5 } };
+            CollectionAssert.AreEqual(new object[] { 1, 2, 3, 4, 5 }, _.flattenDeep<Object>(tempArray));
+        }
+
+        [TestMethod()]
         public void headTest()
         {
             Assert.AreEqual(1, _.head(new int[] { 1, 2, 3 }));
@@ -107,16 +121,15 @@ namespace sharpDash.Tests
         }
 
         [TestMethod()]
-        public void intersectTest()
+        public void intersectionTest()
         {
-            CollectionAssert.AreEqual(new int[] { 2 }, _.intersect(new int[] { 2, 1 }, new int[] { 2, 3 }));
+            CollectionAssert.AreEqual(new int[] { 2 }, _.intersection(new int[] { 2, 1 }, new int[] { 2, 3 }));
         }
 
         [TestMethod()]
         public void joinTest()
         {
-            String manipulated = _.join(new char[] { 'a', 'b', 'c' }, "~");
-            Assert.AreEqual("a~b~c", manipulated);
+            Assert.AreEqual("a~b~c", _.join(new char[] { 'a', 'b', 'c' }, "~"));
         }
 
         [TestMethod()]
