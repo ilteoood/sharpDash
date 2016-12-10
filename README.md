@@ -7,10 +7,12 @@ Today I'm supporting just few of its functions, only those that operate on Array
 
 - chunk
 - compact
+- concat
 - difference
 - drop
 - dropRight
 - fill
+- first
 - head
 - indexOf
 - initial
@@ -34,6 +36,8 @@ Today I'm supporting just few of its functions, only those that operate on Array
 - takeRight
 - union
 - without
+- zip
+- unzip
 
 More functions will be added in future.
 

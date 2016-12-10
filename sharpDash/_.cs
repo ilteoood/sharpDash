@@ -53,6 +53,11 @@ namespace sharpDash
             return firstPart.Concat(toReplace).Concat(secondPart).ToArray();
         }
 
+        public static T first<T>(T[] toHead)
+        {
+            return head(toHead);
+        }
+
         public static T head<T>(T[] toHead)
         {
             return toHead.FirstOrDefault();
@@ -198,6 +203,21 @@ namespace sharpDash
         {
             T[] copy = (T[]) sourceSearch.Clone();
             return pullAll(ref copy, toRemove);
+        }
+
+        public static T[,] zip<T>(T[,] toZip)
+        {
+            int row = toZip.GetLength(0), column = toZip.GetLength(1);
+            T[,] tempMatrix = new T[column, row];
+            for (int i = 0; i < row; i++)
+                for (int k = 0; k < column; k++)
+                    tempMatrix[k, i] = toZip[i, k];
+            return tempMatrix;
+        }
+
+        public static T[,] unzip<T>(T[,] toUnzip)
+        {
+            return zip(toUnzip);
         }
 
     }

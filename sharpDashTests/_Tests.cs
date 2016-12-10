@@ -88,6 +88,8 @@ namespace sharpDash.Tests
         {
             Assert.AreEqual(1, _.head(new int[] { 1, 2, 3 }));
             Assert.AreEqual(0, _.head(new int[] {}));
+            Assert.AreEqual(1, _.first(new int[] { 1, 2, 3 }));
+            Assert.AreEqual(0, _.first(new int[] { }));
         }
 
         [TestMethod()]
@@ -252,6 +254,44 @@ namespace sharpDash.Tests
         public void withoutTest()
         {
             CollectionAssert.AreEqual(new int[] { 3 }, _.without(new int[] { 2, 1, 2, 3 }, 1, 2));
+        }
+
+        [TestMethod()]
+        public void zipTest()
+        {
+            Object[,] toZip = new Object[,]
+            {
+                {'a', 'b'},
+                {1, 2},
+                {true, false }
+            };
+
+            Object[,] zipped = _.zip(toZip);
+            Object[,] expected = new Object[,]
+            {
+                {'a', 1, true},
+                {'b', 2, false}
+            };
+            CollectionAssert.AreEqual(expected, zipped);
+        }
+
+        [TestMethod()]
+        public void unzipTest()
+        {
+            Object[,] zipped = new Object[,]
+            {
+                {'a', 1, true},
+                {'b', 2, false}
+            };
+            Object[,] unzipped = _.unzip(zipped);
+            Object[,] expected = new Object[,]
+            {
+                {'a', 'b'},
+                {1, 2},
+                {true, false }
+            };
+            CollectionAssert.AreEqual(expected, unzipped);
+            CollectionAssert.AreEqual(expected, _.unzip(_.zip(unzipped)));
         }
 
     }
