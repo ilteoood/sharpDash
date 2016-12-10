@@ -143,14 +143,16 @@ namespace sharpDash.Tests
         public void pullTest()
         {
             char[] tempArray = new char[] { 'a', 'b', 'c', 'a', 'b', 'c' };
-            CollectionAssert.AreEqual(new char[] { 'b', 'b' }, _.pull(tempArray, 'a', 'c'));
+            _.pull(ref tempArray, 'a', 'c');
+            CollectionAssert.AreEqual(new char[] { 'b', 'b' }, tempArray);
         }
 
         [TestMethod()]
         public void pullAllTest()
         {
             char[] tempArray = new char[] { 'a', 'b', 'c', 'a', 'b', 'c' };
-            CollectionAssert.AreEqual(new char[] { 'b', 'b' }, _.pullAll(tempArray, new char[] { 'a', 'c' }));
+            _.pullAll(ref tempArray, new char[] { 'a', 'c' });
+            CollectionAssert.AreEqual(new char[] { 'b', 'b' }, tempArray);
         }
 
         [TestMethod()]
@@ -218,6 +220,38 @@ namespace sharpDash.Tests
         public void tailTest()
         {
             CollectionAssert.AreEqual(new int[] { 2, 3 }, _.tail(new int[] { 1, 2, 3 }));
+        }
+
+        [TestMethod()]
+        public void takeTest()
+        {
+            int[] tempArray = new int[] { 1, 2, 3 };
+            CollectionAssert.AreEqual(new int[] { 1 }, _.take(tempArray));
+            CollectionAssert.AreEqual(new int[] { 1, 2 }, _.take(tempArray, 2));
+            CollectionAssert.AreEqual(tempArray, _.take(tempArray, 5));
+            CollectionAssert.AreEqual(new int[] { }, _.take(tempArray, 0));
+        }
+
+        [TestMethod()]
+        public void takeRightTest()
+        {
+            int[] tempArray = new int[] { 1, 2, 3 };
+            CollectionAssert.AreEqual(new int[] { 3 }, _.takeRight(tempArray));
+            CollectionAssert.AreEqual(new int[] { 2, 3 }, _.takeRight(tempArray, 2));
+            CollectionAssert.AreEqual(tempArray, _.takeRight(tempArray, 5));
+            CollectionAssert.AreEqual(new int[] { }, _.takeRight(tempArray, 0));
+        }
+
+        [TestMethod()]
+        public void unionTest()
+        {
+            CollectionAssert.AreEqual(new int[] { 2, 1 }, _.union(new int[] { 2 }, new int[] { 1, 2 }));
+        }
+
+        [TestMethod()]
+        public void withoutTest()
+        {
+            CollectionAssert.AreEqual(new int[] { 3 }, _.without(new int[] { 2, 1, 2, 3 }, 1, 2));
         }
 
     }

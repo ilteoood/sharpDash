@@ -14,13 +14,13 @@ namespace sharpDash
             int matrixSize = (toChunk.Count - 1)/ size + 1;
             T[][] toReturn = new T[matrixSize][];
             for (int i = 0; i < matrixSize; i++)
-                toReturn[i] = toChunk.Skip(i * size).Take(size).Cast<T>().ToArray<T>();
+                toReturn[i] = toChunk.Skip(i * size).Take(size).ToArray();
             return toReturn;
         }
 
         public static T[] compact<T>(T[] toCompact)
         {
-            return toCompact.Where(element => !element.Equals(false) && !element.Equals(null) && !element.Equals(0) && !element.Equals("")).Cast<T>().ToArray<T>();
+            return toCompact.Where(element => !element.Equals(false) && !element.Equals(null) && !element.Equals(0) && !element.Equals("")).ToArray<T>();
         }
 
         public static T[] concat<T>(params T[] args)
@@ -30,17 +30,17 @@ namespace sharpDash
 
         public static T[] difference<T>(T[] toCheck, T[] toExclude)
         {
-            return toCheck.Where(element => !toExclude.Contains(element)).Cast<T>().ToArray();
+            return toCheck.Where(element => !toExclude.Contains(element)).ToArray();
         }
         
         public static T[] drop<T>(T[] toDrop, int n = 1)
         {
-            return toDrop.Skip(n).Cast<T>().ToArray();
+            return toDrop.Skip(n).ToArray();
         }
 
         public static T[] dropRight<T>(T[] toDrop, int n = 1)
         {
-            return toDrop.Reverse().Skip(n).Reverse().Cast<T>().ToArray();
+            return toDrop.Reverse().Skip(n).Reverse().ToArray();
         }
 
         public static T[] fill<T>(T[] toFill, T fillWith, int start = 0, int end=-1)
@@ -50,7 +50,7 @@ namespace sharpDash
             IEnumerable<T> firstPart = toFill.Take(start);
             IEnumerable<T> toReplace = Enumerable.Repeat(fillWith, end - start);
             IEnumerable<T> secondPart = toFill.Skip(end);
-            return firstPart.Concat(toReplace).Concat(secondPart).Cast<T>().ToArray();
+            return firstPart.Concat(toReplace).Concat(secondPart).ToArray();
         }
 
         public static T head<T>(T[] toHead)
@@ -74,7 +74,7 @@ namespace sharpDash
             IEnumerable<T> tempEnumerable = args[0];
             foreach (T[] tempArg in args)
                 tempEnumerable = tempEnumerable.Intersect(tempArg);
-            return tempEnumerable.Cast<T>().ToArray();
+            return tempEnumerable.ToArray();
         }
 
         public static String join<T>(T[] toJoin, String separator = ",")
@@ -106,17 +106,17 @@ namespace sharpDash
             return sourceSeach[n];
         }
 
-        public static T[] pull<T>(T[] toPull, params T[] args)
+        public static T[] pull<T>(ref T[] toPull, params T[] args)
         {
             foreach(T arg in args)
                 toPull = difference(toPull, new T[] { arg });
             return toPull;
         }
 
-        public static T[] pullAll<T>(T[] toPull, params T[][] args)
+        public static T[] pullAll<T>(ref T[] toPull, params T[][] args)
         {
             foreach (T[] arg in args)
-                toPull = pull(toPull, arg);
+                toPull = pull(ref toPull, arg);
             return toPull;
         }
 
@@ -127,7 +127,7 @@ namespace sharpDash
             foreach (int index in indexes)
                 toReturn.Add(toPull[index]);
             toReturnArray = toReturn.ToArray();
-            toPull = pull(toPull, toReturnArray);
+            pull(ref toPull, toReturnArray);
             return toReturnArray;
         }
 
@@ -176,6 +176,29 @@ namespace sharpDash
             return sourceSearch.Skip(1).ToArray();
         }
 
+        public static T[] take<T>(T[] toTake, int n=1)
+        {
+            return toTake.Take(n).ToArray();
+        }
+
+        public static T[] takeRight<T>(T[] toTake, int n = 1)
+        {
+            return toTake.Reverse().Take(n).Reverse().ToArray();
+        }
+
+        public static T[] union<T>(params T[][] toUnion)
+        {
+            IEnumerable<T> temp = new List<T>();
+            foreach(T[] union in toUnion)
+                temp = temp.Union(union);
+            return temp.ToArray();
+        }
+
+        public static T[] without<T>(T[] sourceSearch, params T[] toRemove)
+        {
+            T[] copy = (T[]) sourceSearch.Clone();
+            return pullAll(ref copy, toRemove);
+        }
 
     }
 }

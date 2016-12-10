@@ -3,7 +3,7 @@ sharpDash is a C# porting of the famouse Javascript Lodash library.
 
 For the documentation, you can use the official one provided by [Lodash](https://lodash.com/docs/4.17.2).
 
-Today I'm supporting just few of it's functions, only those that operate on Arrays. In particular, the supported functions are:
+Today I'm supporting just few of its functions, only those that operate on Arrays. In particular, the supported functions are:
 
 - chunk
 - compact
@@ -22,7 +22,7 @@ Today I'm supporting just few of it's functions, only those that operate on Arra
 - pull
 - pullAll
 - pullAt
-- revere
+- reverse
 - slice
 - sortedIndex
 - sortedLastIndex
@@ -30,6 +30,10 @@ Today I'm supporting just few of it's functions, only those that operate on Arra
 - uniq
 - sortedUniq
 - tail
+- take
+- takeRight
+- union
+- without
 
 More functions will be added in future.
 
