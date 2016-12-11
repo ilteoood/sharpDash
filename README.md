@@ -40,9 +40,12 @@ Today I'm supporting just few of its functions, only those that operate on Array
 - take
 - takeRight
 - union
+- unionBy
 - uniq
 - unzip
 - without
+- xor
+- xorBy
 - zip
 
 More functions will be added in future.

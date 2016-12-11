@@ -240,10 +240,30 @@ namespace sharpDash
             return temp.ToArray();
         }
 
+        public static T[] unionBy<T>(Func<T,T> iteratee, params T[][] toUnion)
+        {
+            T[] tempArray = toUnion[0];
+            IEnumerable<T> temp = toUnion[0].Select(element => iteratee(element));
+            return tempArray.Concat(from unionArray in toUnion.Skip(1)
+                        from union in unionArray
+                        where !temp.Contains(iteratee(union))
+                        select union).ToArray();
+        }
+
         public static T[] without<T>(T[] sourceSearch, params T[] toRemove)
         {
             T[] copy = (T[]) sourceSearch.Clone();
             return pullAll(ref copy, toRemove);
+        }
+
+        public static T[] xor<T>(params T[][] toXor)
+        {
+            return difference(union(toXor), intersection(toXor));
+        }
+
+        public static T[] xorBy<T>(Func<T,T> iteratee, params T[][] toXor)
+        {
+            return difference(unionBy(iteratee, toXor), intersectionBy(iteratee, toXor));
         }
 
         public static T[,] zip<T>(T[,] toZip)

@@ -270,9 +270,27 @@ namespace sharpDash.Tests
         }
 
         [TestMethod()]
+        public void unionByTest()
+        {
+            CollectionAssert.AreEqual(new double[] { 2.1, 1.2 }, _.unionBy(Math.Floor, new double[] { 2.1 }, new double[] { 1.2, 2.3 }));
+        }
+
+        [TestMethod()]
         public void withoutTest()
         {
             CollectionAssert.AreEqual(new int[] { 3 }, _.without(new int[] { 2, 1, 2, 3 }, 1, 2));
+        }
+
+        [TestMethod()]
+        public void xorTest()
+        {
+            CollectionAssert.AreEqual(new int[] { 1, 3 }, _.xor(new int[] { 2, 1 }, new int[] { 2, 3 }));
+        }
+
+        [TestMethod()]
+        public void xorByTest()
+        {
+            CollectionAssert.AreEqual(new double[] { 1.2, 3.4 }, _.xorBy(Math.Floor, new double[] { 2.1, 1.2 }, new double[] { 2.3, 3.4 }));
         }
 
         [TestMethod()]
