@@ -127,6 +127,12 @@ namespace sharpDash.Tests
         }
 
         [TestMethod()]
+        public void intersectionByTest()
+        {
+            CollectionAssert.AreEqual(new double[] { 2.1 }, _.intersectionBy(Math.Floor, new double[] { 2.1, 1.2 }, new double[] { 2.3, 3.4 }));
+        }
+
+        [TestMethod()]
         public void joinTest()
         {
             Assert.AreEqual("a~b~c", _.join(new char[] { 'a', 'b', 'c' }, "~"));

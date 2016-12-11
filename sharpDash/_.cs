@@ -114,6 +114,16 @@ namespace sharpDash
             return tempEnumerable.ToArray();
         }
 
+        public static T[] intersectionBy<T>(Func<T, T> iteratee, params T[][] args)
+        {
+            T[] temp = args[0];
+            return (from argArray in args.Skip(1)
+                    from argElement in argArray
+                    from argFirst in temp
+                    where iteratee(argFirst).Equals(iteratee(argElement))
+                    select argFirst).ToArray();
+        }
+
         public static String join<T>(T[] toJoin, String separator = ",")
         {
             String toReturn = "";
@@ -206,6 +216,7 @@ namespace sharpDash
         {
             return uniq(sourceSearch);
         }
+
         public static T[] tail<T>(T[] sourceSearch)
         {
             return sourceSearch.Skip(1).ToArray();

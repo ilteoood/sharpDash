@@ -21,6 +21,7 @@ Today I'm supporting just few of its functions, only those that operate on Array
 - indexOf
 - initial
 - intersection
+- intersectionBy
 - join
 - last
 - lastIndexOf
@@ -31,17 +32,18 @@ Today I'm supporting just few of its functions, only those that operate on Array
 - reverse
 - slice
 - sortedIndex
+- sortedIndexOf
 - sortedLastIndex
 - sortedLastIndexOf
-- uniq
 - sortedUniq
 - tail
 - take
 - takeRight
 - union
+- uniq
+- unzip
 - without
 - zip
-- unzip
 
 More functions will be added in future.
 
