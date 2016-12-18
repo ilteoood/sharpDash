@@ -331,5 +331,23 @@ namespace sharpDash.Tests
             CollectionAssert.AreEqual(expected, _.unzip(_.zip(unzipped)));
         }
 
+        [TestMethod()]
+        public void zipObjectTest()
+        {
+            Dictionary<char, int> expected = new Dictionary<char, int>();
+            expected.Add('a', 1);
+            expected.Add('b', 2);
+            CollectionAssert.Equals(expected, _.zipObject(new char[] { 'a', 'b' }, new int[] { 1, 2 }));
+        }
+
+        [TestMethod()]
+        public void countByTest()
+        {
+            Dictionary<int, int> expected = new Dictionary<int, int>();
+            expected.Add(4, 1);
+            expected.Add(6, 2);
+            CollectionAssert.Equals(expected, _.countBy(Math.Floor, new double[] { 6.1, 4.2, 6.3 }));
+        }
+
     }
 }
