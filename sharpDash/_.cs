@@ -53,6 +53,11 @@ namespace sharpDash
             return array.Reverse().Skip(n).Reverse().ToArray();
         }
 
+        public static T[] dropRightWhile<T>(T[] array, Func<T, bool> predicate)
+        {
+            return array.Reverse().Where(element => predicate(element)).Reverse().ToArray();
+        }
+
         public static T[] fill<T>(T[] array, T value, int start = 0, int end=-1)
         {
             if (end == -1)
@@ -176,6 +181,13 @@ namespace sharpDash
             return toReturnArray;
         }
 
+        public static T[] remove<T>(ref T[] array, Func<T, bool> predicate)
+        {
+            T[] toReturn = array.Where(element => predicate(element)).ToArray();
+            array = difference(array, toReturn);
+            return toReturn;
+        }
+
         public static T[] reverse<T>(ref T[] array)
         {
             return array = array.Reverse().ToArray();
@@ -281,9 +293,9 @@ namespace sharpDash
             return zip(arrays);
         }
 
-        public static Dictionary<T,T1> zipObject<T, T1>(T[] props, T1[] values)
+        public static Dictionary<TKey,TValue> zipObject<TKey, TValue>(TKey[] props, TValue[] values)
         {
-            Dictionary<T, T1> toReturn = new Dictionary<T, T1>();
+            Dictionary<TKey, TValue> toReturn = new Dictionary<TKey, TValue>();
             for (int i = 0; i < props.Length; i++)
                 toReturn.Add(props[i], values[i]);
             return toReturn;
@@ -296,7 +308,6 @@ namespace sharpDash
             foreach (var element in iterated)
                 toReturn.Add(element.Key, iterated.Count());
             return toReturn;
-
         }
 
     }

@@ -13,6 +13,7 @@ Today I'm supporting just few of its functions, only those that operate on Array
 - differenceBy
 - drop
 - dropRight
+- dropRightWhile
 - fill
 - first
 - flatten
@@ -30,6 +31,7 @@ Today I'm supporting just few of its functions, only those that operate on Array
 - pull
 - pullAll
 - pullAt
+- remove
 - reverse
 - slice
 - sortedIndex
