@@ -398,5 +398,32 @@ namespace sharpDash.Tests
             CollectionAssert.Equals(expected, _.countBy(Math.Floor, new double[] { 6.1, 4.2, 6.3 }));
         }
 
+        private bool isInactive(Dictionary<String, String> dict)
+        {
+            return dict["active"].Equals("false");
+        }
+
+        [TestMethod()]
+        public void filterTest()
+        {
+            Dictionary<String, String>[] tempDict = new Dictionary<string, string>[] {
+                new Dictionary<String, String>(),
+                new Dictionary<String, String>()
+            };
+            tempDict[0].Add("user", "barney");
+            tempDict[0].Add("age", "36");
+            tempDict[0].Add("active", "true");
+            tempDict[1].Add("user", "fred");
+            tempDict[1].Add("age", "40");
+            tempDict[1].Add("active", "false");
+            Dictionary<String, String>[] expectedDict = new Dictionary<string, string>[] {
+                new Dictionary<String, String>()
+            };
+            expectedDict[0].Add("user", "fred");
+            expectedDict[0].Add("age", "40");
+            expectedDict[0].Add("active", "false");
+            Assert.IsTrue(dictEquals(expectedDict, _.filter<String, String>(tempDict, isInactive)));
+        }
+
     }
 }

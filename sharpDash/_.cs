@@ -310,5 +310,10 @@ namespace sharpDash
             return toReturn;
         }
 
+        public static Dictionary<TKey, TValue>[] filter<TKey, TValue>(Dictionary<TKey, TValue>[] collection, Func<Dictionary<TKey, TValue>, bool> predicate)
+        {
+            return collection.Where(dict => predicate(dict)).ToArray();
+        }
+
     }
 }

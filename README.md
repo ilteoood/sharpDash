@@ -54,6 +54,7 @@ Today I'm supporting just few of its functions, only those that operate on Array
 
 ## Collection:
 - countBy
+- filter
 
 More functions will be added in future.
 
