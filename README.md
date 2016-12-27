@@ -53,8 +53,12 @@ Today I'm supporting just few of its functions, only those that operate on Array
 - zipObject
 
 ## Collection:
-- countBy
-- filter
+- countBy (array only)
+- filter (object only)
+- find (object only)
+- findLast (object only)
+- includes
+
 
 More functions will be added in future.
 

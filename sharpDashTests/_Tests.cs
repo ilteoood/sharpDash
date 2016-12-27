@@ -395,34 +395,62 @@ namespace sharpDash.Tests
             Dictionary<int, int> expected = new Dictionary<int, int>();
             expected.Add(4, 1);
             expected.Add(6, 2);
-            CollectionAssert.Equals(expected, _.countBy(Math.Floor, new double[] { 6.1, 4.2, 6.3 }));
+            CollectionAssert.Equals(expected, _.countBy(new double[] { 6.1, 4.2, 6.3 }, Math.Floor));
         }
 
-        private bool isInactive(Dictionary<String, String> dict)
+        private bool isInactive(dynamic obj)
         {
-            return dict["active"].Equals("false");
+            return obj.active.Equals(false);
         }
 
         [TestMethod()]
         public void filterTest()
         {
-            Dictionary<String, String>[] tempDict = new Dictionary<string, string>[] {
-                new Dictionary<String, String>(),
-                new Dictionary<String, String>()
+            var temp = new[] {
+                new {user = "barney", age = 36, active = true },
+                new {user = "fred",  age = 40, active = false}
             };
-            tempDict[0].Add("user", "barney");
-            tempDict[0].Add("age", "36");
-            tempDict[0].Add("active", "true");
-            tempDict[1].Add("user", "fred");
-            tempDict[1].Add("age", "40");
-            tempDict[1].Add("active", "false");
-            Dictionary<String, String>[] expectedDict = new Dictionary<string, string>[] {
-                new Dictionary<String, String>()
+            Assert.IsTrue(Enumerable.SequenceEqual(new[] {new {user = "fred",  age = 40, active = false}}, _.filter(temp, isInactive)));
+        }
+
+        private bool age(dynamic obj)
+        {
+            return obj.age <  40;
+        }
+
+        [TestMethod()]
+        public void findTest()
+        {
+            var temp = new[] {
+                new {user = "barney", age = 36, active = true },
+                new {user = "fred",  age = 40, active = false},
+                new {user = "pebbles", age = 1, active = true }
             };
-            expectedDict[0].Add("user", "fred");
-            expectedDict[0].Add("age", "40");
-            expectedDict[0].Add("active", "false");
-            Assert.IsTrue(dictEquals(expectedDict, _.filter<String, String>(tempDict, isInactive)));
+            var expected = new { user = "barney", age = 36, active = true };
+            var first = _.find(temp, age);
+            Assert.IsTrue(expected.user == first.user && expected.age == first.age && expected.active == first.active);
+        }
+
+        [TestMethod()]
+        public void findLastTest()
+        {
+            var temp = new[] {
+                new {user = "barney", age = 36, active = true },
+                new {user = "fred",  age = 40, active = false},
+                new {user = "pebbles", age = 1, active = true }
+            };
+            var expected = new { user = "pebbles", age = 1, active = true };
+            var last = _.findLast(temp, age);
+            Assert.IsTrue(expected.user == last.user && expected.age == last.age && expected.active == last.active);
+        }
+
+        [TestMethod()]
+        public void includesTest()
+        {
+            Assert.IsTrue(_.includes(new[] { 1, 2, 3 }, 1));
+            Assert.IsFalse(_.includes(new[] { 1, 2, 3 }, 1, 2));
+            Assert.IsTrue(_.includes(new[] {new {a = 1, b = 2}}, 1));
+            Assert.IsTrue(_.includes("abcd", "bc"));
         }
 
     }

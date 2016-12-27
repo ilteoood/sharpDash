@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -301,7 +302,7 @@ namespace sharpDash
             return toReturn;
         }
 
-        public static Dictionary<T, int> countBy<T>(Func<T, T> iteratee, T[] collection)
+        public static Dictionary<T, int> countBy<T>(T[] collection, Func<T, T> iteratee)
         {
             Dictionary<T, int> toReturn = new Dictionary<T, int>();
             IEnumerable<IGrouping<T, T>> iterated = collection.Select(element => iteratee(element)).GroupBy(element => element);
@@ -310,9 +311,43 @@ namespace sharpDash
             return toReturn;
         }
 
-        public static Dictionary<TKey, TValue>[] filter<TKey, TValue>(Dictionary<TKey, TValue>[] collection, Func<Dictionary<TKey, TValue>, bool> predicate)
+        public static IEnumerable<dynamic> filter(IEnumerable<dynamic> collection, Func<dynamic, bool> predicate)
         {
-            return collection.Where(dict => predicate(dict)).ToArray();
+            return collection.Where(element => predicate(element));
+        }
+
+        public static dynamic find(IEnumerable<dynamic> collection, Func<dynamic, bool> predicate, int fromIndex = 0)
+        {
+            return filter(collection.Skip(fromIndex), predicate).First();
+        }
+
+        public static dynamic findLast(IEnumerable<dynamic> collection, Func<dynamic, bool> predicate, int fromIndex = -1)
+        {
+            if (fromIndex == -1)
+                fromIndex = collection.Count() - 1;
+            return filter(collection.Skip(fromIndex), predicate).Last();
+        }
+
+        public static bool includes<T>(T[] collection, T value, int fromIndex = 0)
+        {
+            return collection.Skip(fromIndex).Contains(value);
+        }
+
+        public static bool includes(IEnumerable<dynamic> collection, dynamic value, int fromIndex = 0)
+        {
+            bool temp = false;
+            foreach (dynamic elem in collection.Skip(fromIndex))
+            {
+                TypeInfo type = elem.GetType();
+                foreach (PropertyInfo property in type.GetProperties())
+                    temp |= property.GetValue(elem, null).Equals(value);
+            }
+            return temp;
+        }
+
+        public static bool includes(String collection, String value, int fromIndex = 0)
+        {
+            return collection.Substring(fromIndex).Contains(value);
         }
 
     }
