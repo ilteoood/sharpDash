@@ -311,21 +311,21 @@ namespace sharpDash
             return toReturn;
         }
 
-        public static IEnumerable<dynamic> filter(IEnumerable<dynamic> collection, Func<dynamic, bool> predicate)
+        public static T[] filter<T>(T[] collection, Func<T, bool> predicate)
         {
-            return collection.Where(element => predicate(element));
+            return collection.Where(element => predicate(element)).ToArray();
         }
 
-        public static dynamic find(IEnumerable<dynamic> collection, Func<dynamic, bool> predicate, int fromIndex = 0)
+        public static T find<T>(T[] collection, Func<T, bool> predicate, int fromIndex = 0)
         {
-            return filter(collection.Skip(fromIndex), predicate).First();
+            return filter(collection.Skip(fromIndex).ToArray(), predicate).First();
         }
 
-        public static dynamic findLast(IEnumerable<dynamic> collection, Func<dynamic, bool> predicate, int fromIndex = -1)
+        public static T findLast<T>(T[] collection, Func<T, bool> predicate, int fromIndex = -1)
         {
             if (fromIndex == -1)
                 fromIndex = collection.Count() - 1;
-            return filter(collection.Skip(fromIndex), predicate).Last();
+            return find(collection.Reverse().ToArray(), predicate);
         }
 
         public static bool includes<T>(T[] collection, T value, int fromIndex = 0)
@@ -337,11 +337,8 @@ namespace sharpDash
         {
             bool temp = false;
             foreach (dynamic elem in collection.Skip(fromIndex))
-            {
-                TypeInfo type = elem.GetType();
-                foreach (PropertyInfo property in type.GetProperties())
+                foreach (PropertyInfo property in elem.GetType().GetProperties())
                     temp |= property.GetValue(elem, null).Equals(value);
-            }
             return temp;
         }
 

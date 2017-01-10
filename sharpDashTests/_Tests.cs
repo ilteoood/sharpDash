@@ -403,6 +403,11 @@ namespace sharpDash.Tests
             return obj.active.Equals(false);
         }
 
+        private bool odd(int num)
+        {
+            return num % 2 == 1;
+        }
+
         [TestMethod()]
         public void filterTest()
         {
@@ -411,6 +416,7 @@ namespace sharpDash.Tests
                 new {user = "fred",  age = 40, active = false}
             };
             Assert.IsTrue(Enumerable.SequenceEqual(new[] {new {user = "fred",  age = 40, active = false}}, _.filter(temp, isInactive)));
+            CollectionAssert.AreEqual(new int[] { 1, 3 }, _.filter(new int[] { 1, 2, 3, 4 }, odd));
         }
 
         private bool age(dynamic obj)
@@ -429,6 +435,7 @@ namespace sharpDash.Tests
             var expected = new { user = "barney", age = 36, active = true };
             var first = _.find(temp, age);
             Assert.IsTrue(expected.user == first.user && expected.age == first.age && expected.active == first.active);
+            Assert.AreEqual(1, _.find(new int[] { 1, 2, 3, 4 }, odd));
         }
 
         [TestMethod()]
@@ -440,8 +447,9 @@ namespace sharpDash.Tests
                 new {user = "pebbles", age = 1, active = true }
             };
             var expected = new { user = "pebbles", age = 1, active = true };
-            var last = _.findLast(temp, age);
+            var last = _.findLast<dynamic>(temp, age);
             Assert.IsTrue(expected.user == last.user && expected.age == last.age && expected.active == last.active);
+            Assert.AreEqual(3, _.findLast(new int[] { 1, 2, 3, 4 }, odd));
         }
 
         [TestMethod()]

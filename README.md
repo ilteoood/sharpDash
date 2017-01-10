@@ -54,9 +54,9 @@ Today I'm supporting just few of its functions, only those that operate on Array
 
 ## Collection:
 - countBy (array only)
-- filter (object only)
-- find (object only)
-- findLast (object only)
+- filter
+- find
+- findLast
 - includes
 
 
