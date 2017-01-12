@@ -3,9 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace sharpDash
 {
@@ -307,7 +304,7 @@ namespace sharpDash
             Dictionary<T, int> toReturn = new Dictionary<T, int>();
             IEnumerable<IGrouping<T, T>> iterated = collection.Select(element => iteratee(element)).GroupBy(element => element);
             foreach (var element in iterated)
-                toReturn.Add(element.Key, iterated.Count());
+                toReturn.Add(element.Key, element.Count());
             return toReturn;
         }
 
