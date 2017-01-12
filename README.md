@@ -1,4 +1,5 @@
 # sharpDash
+[![Build Status](https://travis-ci.org/ilteoood/sharpDash.png)](https://travis-ci.org/ilteoood/sharpDash)
 sharpDash is a C# porting of the famouse Javascript Lodash library.
 
 For the documentation, you can use the official one provided by [Lodash](https://lodash.com/docs/4.17.2).
