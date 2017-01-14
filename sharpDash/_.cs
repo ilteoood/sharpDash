@@ -344,5 +344,10 @@ namespace sharpDash
             return collection.Substring(fromIndex).Contains(value);
         }
 
+        public static double now()
+        {
+            return DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds;
+        }
+
     }
 }

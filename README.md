@@ -1,5 +1,4 @@
-# sharpDash
-[![Build Status](https://travis-ci.org/ilteoood/sharpDash.png)](https://travis-ci.org/ilteoood/sharpDash)
+# sharpDash [![Build Status](https://travis-ci.org/ilteoood/sharpDash.png)](https://travis-ci.org/ilteoood/sharpDash) [![Language](https://img.shields.io/badge/Language-C%23-blue.svg)](https://img.shields.io/badge/Language-C%23-blue.svg)
 sharpDash is a C# porting of the famouse Javascript Lodash library.
 
 For the documentation, you can use the official one provided by [Lodash](https://lodash.com/docs/4.17.2).
@@ -59,6 +58,9 @@ Today I'm supporting just few of its functions, only those that operate on Array
 - find
 - findLast
 - includes
+
+## Date:
+- now
 
 
 More functions will be added in future.
