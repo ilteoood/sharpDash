@@ -465,5 +465,61 @@ namespace sharpDash.Tests
             Assert.NotEqual((int)temp, temp);
         }
 
+        [Fact]
+        public void camelCaseTest()
+        {
+            Assert.Equal("fooBar", _.camelCase("Foo Bar"));
+            Assert.Equal("fooBar", _.camelCase("--foo-bar--"));
+            Assert.Equal("fooBar", _.camelCase("__FOO_BAR__"));
+        }
+
+        [Fact]
+        public void capitalizeTest()
+        {
+            Assert.Equal("Fred", _.capitalize("FRED"));
+        }
+
+        [Fact]
+        public void deburrTest()
+        {
+            Assert.Equal("deja vu", _.deburr("déjà vu"));
+        }
+
+        [Fact]
+        public void endsWithTest()
+        {
+            Assert.True(_.endsWith("abc", "c"));
+            Assert.False(_.endsWith("abc", "b"));
+            Assert.True(_.endsWith("abc", "b", 2));
+        }
+
+        [Fact]
+        public void escapeTest()
+        {
+            Assert.Equal("fred, barney, &amp; pebbles", _.escape("fred, barney, & pebbles"));
+        }
+
+        [Fact]
+        public void kebabCaseTest()
+        {
+            Assert.Equal("foo-bar", _.kebabCase("Foo Bar"));
+            Assert.Equal("foo-bar", _.kebabCase("--foo-bar--"));
+            Assert.Equal("foo-bar", _.kebabCase("__FOO_BAR__"));
+        }
+
+        [Fact]
+        public void lowerFirstTest()
+        {
+            Assert.Equal("fred", _.lowerFirst("Fred"));
+            Assert.Equal("fRED", _.lowerFirst("FRED"));
+        }
+
+        [Fact]
+        public void parseIntTest()
+        {
+            Assert.Equal(8, _.parseInt("08"));
+            Assert.Equal(1000, _.parseInt("08", 2));
+        }
+
     }
 }

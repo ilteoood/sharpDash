@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
+using System.Text;
+using System.Security;
+using System.Globalization;
 
 namespace sharpDash
 {
@@ -372,6 +376,70 @@ namespace sharpDash
             if (floating || lower % 1 != 0 && upper % 1 != 0)
                 return toReturn;
             return (int)toReturn;
+        }
+
+        private static String changeFirstChar(String toChange, bool toUpper)
+        {
+            if (toUpper)
+                return char.ToUpper(toChange[0]) + toChange.Substring(1);
+            return char.ToLower(toChange[0]) + toChange.Substring(1);
+        }
+
+        public static String camelCase(String str= "")
+        {
+            Match matches = Regex.Match(str, "[a-zA-Z]+");
+            String toReturn = changeFirstChar(matches.Value.ToLower(), false);
+            while (!(matches = matches.NextMatch()).Value.Equals(""))
+                toReturn += changeFirstChar(matches.Value.ToLower(), true);
+            return toReturn;
+        }
+
+        public static String capitalize(String str = "")
+        {
+            return changeFirstChar(str.ToLower(), true);
+        }
+
+        public static String deburr(String str = "")
+        {
+            str = str.Normalize(NormalizationForm.FormD);
+            String temp = "";
+            foreach (char c in str)
+                if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+                    temp += c;
+            return temp.Normalize(NormalizationForm.FormC);
+        }
+
+        public static bool endsWith(String str, String target, int position = -1)
+        {
+            if (position == -1)
+                position = str.Length;
+            return str.Substring(0, position).EndsWith(target);
+        }
+
+        public static String escape(String str)
+        {
+            return SecurityElement.Escape(str);
+        }
+
+        public static String kebabCase(String str)
+        {
+            Match matches = Regex.Match(str, "[a-zA-Z]+");
+            String toReturn = changeFirstChar(matches.Value.ToLower(), false);
+            while (!(matches = matches.NextMatch()).Value.Equals(""))
+                toReturn += "-" + changeFirstChar(matches.Value.ToLower(), false);
+            return toReturn;
+        }
+
+        public static String lowerFirst(String str = "")
+        {
+            return changeFirstChar(str, false);
+        }
+
+        public static int parseInt(String str = "", int radix = 10)
+        {
+            int parsed;
+            int.TryParse(str, out parsed);
+            return int.Parse(Convert.ToString(parsed, radix));
         }
 
     }
