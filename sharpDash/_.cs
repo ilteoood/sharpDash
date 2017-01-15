@@ -349,5 +349,30 @@ namespace sharpDash
             return DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds;
         }
 
+        public static double clamp(double number, double lower, double upper)
+        {
+            return Math.Min(Math.Max(number, lower), upper);
+        }
+
+        public static bool inRange(double number, double end, double start = 0)
+        {
+            if(end < start)
+            {
+                end = end * start;
+                start = end / start;
+                end = end / start;
+            }
+            return number > start && number < end;
+        }
+
+        public static double random(double lower = 0, double upper = 1, bool floating = false)
+        {
+            Random random = new Random();
+            double toReturn = random.NextDouble() * (upper - lower) + lower;
+            if (floating || lower % 1 != 0 && upper % 1 != 0)
+                return toReturn;
+            return (int)toReturn;
+        }
+
     }
 }

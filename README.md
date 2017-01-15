@@ -3,7 +3,7 @@ sharpDash is a C# porting of the famouse Javascript Lodash library.
 
 For the documentation, you can use the official one provided by [Lodash](https://lodash.com/docs/4.17.2).
 
-Today I'm supporting just few of its functions, only those that operate on Array and Collection. In particular, the supported functions are:
+Today I'm supporting just few of its functions, only those that operate on Array, Collection, Date and Number. In particular, the supported functions are:
 
 ## Array:
 - chunk
@@ -61,6 +61,11 @@ Today I'm supporting just few of its functions, only those that operate on Array
 
 ## Date:
 - now
+
+## Number:
+- clamp
+- inRange
+- random
 
 
 More functions will be added in future.

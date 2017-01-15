@@ -433,5 +433,37 @@ namespace sharpDash.Tests
             Assert.True(_.includes("abcd", "bc"));
         }
 
+        [Fact]
+        public void clampTest()
+        {
+            Assert.Equal(-5, _.clamp(-10, -5, 5));
+            Assert.Equal(5, _.clamp(10, -5, 5));
+        }
+
+        [Fact]
+        public void inRangeTest()
+        {
+            Assert.True(_.inRange(3,4,2));
+            Assert.True(_.inRange(4,8));
+            Assert.False(_.inRange(4, 2));
+            Assert.False(_.inRange(2, 2));
+            Assert.True(_.inRange(1.2, 2));
+            Assert.False(_.inRange(5.2, 4));
+            Assert.True(_.inRange(-3, -6, -2));
+        }
+
+        [Fact]
+        public void randomTest()
+        {
+            double temp = _.random(0, 5);
+            Assert.Equal((int)temp, temp);
+            temp = _.random(upper: 5);
+            Assert.Equal((int)temp, temp);
+            temp = _.random(upper: 5, floating: true);
+            Assert.NotEqual((int)temp, temp);
+            temp = _.random(1.2, 5.2);
+            Assert.NotEqual((int)temp, temp);
+        }
+
     }
 }
