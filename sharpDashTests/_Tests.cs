@@ -521,5 +521,61 @@ namespace sharpDash.Tests
             Assert.Equal(1000, _.parseInt("08", 2));
         }
 
+        [Fact]
+        public void repeatTest()
+        {
+            Assert.Equal("***", _.repeat("*", 3));
+            Assert.Equal("abcabc", _.repeat("abc", 2));
+            Assert.Equal("", _.repeat("abc", 0));
+        }
+
+        [Fact]
+        public void replaceTest()
+        {
+            Assert.Equal("Hi Barney", _.replace("Hi Fred", "Fred", "Barney"));
+        }
+
+        [Fact]
+        public void splitTest()
+        {
+            Assert.Equal(new String[] { "a", "b" }, _.split("a-b-c", "-", 2));
+        }
+
+        [Fact]
+        public void startsWithTest()
+        {
+            Assert.True(_.startsWith("abc", "a"));
+            Assert.False(_.startsWith("abc", "b"));
+            Assert.True(_.startsWith("abc", "b", 1));
+        }
+
+        [Fact]
+        public void toLowerTest()
+        {
+            Assert.Equal("--foo-bar--", _.toLower("--Foo-Bar--"));
+        }
+
+        [Fact]
+        public void toUpperTest()
+        {
+            Assert.Equal("--FOO-BAR--", _.toUpper("--Foo-Bar--"));
+            Assert.Equal("FOOBAR", _.toUpper("fooBar"));
+            Assert.Equal("__FOO_BAR__", _.toUpper("__foo_bar__"));
+        }
+
+        [Fact]
+        public void trimTest()
+        {
+            Assert.Equal("abc", _.trim("   abc   "));
+            Assert.Equal("abc", _.trim("-_-abc-_-", "_-"));
+        }
+
+        [Fact]
+        public void upperFirstTest()
+        {
+            Assert.Equal("Fred", _.upperFirst("fred"));
+            Assert.Equal("FRED", _.upperFirst("FRED"));
+        }
+
     }
 }

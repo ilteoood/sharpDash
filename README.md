@@ -76,6 +76,12 @@ Today I'm supporting just few of its functions, only those that operate on Array
 - kebabCase
 - lowerFirst
 - parseInt
+- repeat
+- replace
+- split
+- startsWith
+- trim
+- upperFirst
 
 
 More functions will be added in future.

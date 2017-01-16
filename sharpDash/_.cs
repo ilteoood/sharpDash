@@ -442,5 +442,47 @@ namespace sharpDash
             return int.Parse(Convert.ToString(parsed, radix));
         }
 
+        public static String repeat(String str = "", int n = 1)
+        {
+            return new StringBuilder().Insert(0, str, n).ToString();
+        }
+
+        public static String replace(String str, String pattern, String replacement)
+        {
+            return str.Replace(pattern, replacement);
+        }
+
+        public static String[] split(String str, String separator, int limit)
+        {
+            return str.Split(separator.ToCharArray()).Take(limit).ToArray();
+        }
+
+        public static bool startsWith(String str, String target, int position = 0)
+        {
+            return new String(str.Skip(position).ToArray()).StartsWith(target);
+        }
+
+        public static String toLower(String str = "")
+        {
+            return str.ToLower();
+        }
+
+        public static String toUpper(String str = "")
+        {
+            return str.ToUpper();
+        }
+
+        public static String trim(String str, String chars=" ")
+        {
+            foreach (char c in chars)
+                str = str.Replace(c + "", "");
+            return str;
+        }
+
+        public static String upperFirst(String str)
+        {
+            return changeFirstChar(str, true);
+        }
+
     }
 }
