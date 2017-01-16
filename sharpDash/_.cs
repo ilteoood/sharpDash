@@ -385,13 +385,20 @@ namespace sharpDash
             return char.ToLower(toChange[0]) + toChange.Substring(1);
         }
 
+        private static String caseManager(String toCase, String separator, bool firstCharUp, bool otherCharsUp, String pattern = "[a-zA-Z]+")
+        {
+            Match matches = Regex.Match(toCase, pattern);
+            String toReturn = changeFirstChar(matches.Value.ToLower(), firstCharUp);
+            while (!(matches = matches.NextMatch()).Value.Equals(""))
+                toReturn += separator + changeFirstChar(matches.Value.ToLower(), otherCharsUp);
+            if (toReturn.ToLower().Equals(toCase.ToLower()))
+                return caseManager(toCase, separator, firstCharUp, otherCharsUp, "([a-z]|[A-Z])[a-z]+");
+            return toReturn;
+        }
+
         public static String camelCase(String str= "")
         {
-            Match matches = Regex.Match(str, "[a-zA-Z]+");
-            String toReturn = changeFirstChar(matches.Value.ToLower(), false);
-            while (!(matches = matches.NextMatch()).Value.Equals(""))
-                toReturn += changeFirstChar(matches.Value.ToLower(), true);
-            return toReturn;
+            return caseManager(str, "", false, true);
         }
 
         public static String capitalize(String str = "")
@@ -423,11 +430,7 @@ namespace sharpDash
 
         public static String kebabCase(String str)
         {
-            Match matches = Regex.Match(str, "[a-zA-Z]+");
-            String toReturn = changeFirstChar(matches.Value.ToLower(), false);
-            while (!(matches = matches.NextMatch()).Value.Equals(""))
-                toReturn += "-" + changeFirstChar(matches.Value.ToLower(), false);
-            return toReturn;
+            return caseManager(str, "-", false, false);
         }
 
         public static String lowerFirst(String str = "")
@@ -452,9 +455,19 @@ namespace sharpDash
             return str.Replace(pattern, replacement);
         }
 
+        public static String snakeCase(String str)
+        {
+            return caseManager(str, "_", false, false);
+        }
+
         public static String[] split(String str, String separator, int limit)
         {
             return str.Split(separator.ToCharArray()).Take(limit).ToArray();
+        }
+
+        public static String startCase(String str="")
+        {
+            return caseManager(str, " ", true, true);
         }
 
         public static bool startsWith(String str, String target, int position = 0)
@@ -479,9 +492,19 @@ namespace sharpDash
             return str;
         }
 
+        public static String upperCase(String str = "")
+        {
+            return startCase(str).ToUpper();
+        }
+
         public static String upperFirst(String str)
         {
             return changeFirstChar(str, true);
+        }
+
+        public static String[] words(String str, String pattern = "[a-zA-Z]+")
+        {
+            return Regex.Split(str, "(?!" + pattern + ").").Where(elem => elem.Length > 0).ToArray();
         }
 
     }

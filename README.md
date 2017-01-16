@@ -78,10 +78,14 @@ Today I'm supporting just few of its functions, only those that operate on Array
 - parseInt
 - repeat
 - replace
+- snakeCase
 - split
+- startCase
 - startsWith
 - trim
+- upperCase
 - upperFirst
+- words
 
 
 More functions will be added in future.

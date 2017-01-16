@@ -536,9 +536,25 @@ namespace sharpDash.Tests
         }
 
         [Fact]
+        public void snakeCaseTest()
+        {
+            Assert.Equal("foo_bar", _.snakeCase("Foo Bar"));
+            Assert.Equal("foo_bar", _.snakeCase("fooBar"));
+            Assert.Equal("foo_bar", _.snakeCase("--FOO-BAR--"));
+        }
+
+        [Fact]
         public void splitTest()
         {
             Assert.Equal(new String[] { "a", "b" }, _.split("a-b-c", "-", 2));
+        }
+
+        [Fact]
+        public void startCaseTest()
+        {
+            Assert.Equal("Foo Bar",_.startCase("--foo-bar--"));
+            Assert.Equal("Foo Bar", _.startCase("fooBar"));
+            Assert.Equal("Foo Bar", _.startCase("__FOO_BAR__"));
         }
 
         [Fact]
@@ -571,10 +587,25 @@ namespace sharpDash.Tests
         }
 
         [Fact]
+        public void upperCaseTest()
+        {
+            Assert.Equal("FOO BAR", _.upperCase("--foo-bar"));
+            Assert.Equal("FOO BAR", _.upperCase("fooBar"));
+            Assert.Equal("FOO BAR", _.upperCase("__foo_bar__"));
+        }
+
+        [Fact]
         public void upperFirstTest()
         {
             Assert.Equal("Fred", _.upperFirst("fred"));
             Assert.Equal("FRED", _.upperFirst("FRED"));
+        }
+
+        [Fact]
+        public void wordsTest()
+        {
+            Assert.Equal(new String[] { "fred", "barney", "pebbles" }, _.words("fred, barney, & pebbles"));
+            Assert.Equal(new String[] { "fred", "barney", "&", "pebbles" }, _.words("fred, barney, & pebbles", "[^, ]+"));
         }
 
     }
