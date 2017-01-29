@@ -582,5 +582,27 @@ namespace sharpDash
         {
             return precisionManager(number, Math.Pow(10, precision), 0);
         }
+
+        public static double max(double[] array)
+        {
+            if (array.Length == 0)
+                return 0;
+            return array.Max();
+        }
+
+        public static double mean(double[] array)
+        {
+            if (array.Length == 0)
+                return 0;
+            return array.Sum() / array.Length;
+        }
+
+        public static double min(double[] array)
+        {
+            if (array.Length == 0)
+                return 0;
+            return array.Min();
+        }
+
     }
 }

@@ -688,5 +688,24 @@ namespace sharpDash.Tests
             Assert.Equal(4000, _.floor(4060, -2));
         }
 
+        [Fact]
+        public void maxTest()
+        {
+            Assert.Equal(8, _.max(new double[]{4, 2, 8, 6}));
+            Assert.Equal(0, _.max(new double[] { }));
+        }
+
+        [Fact]
+        public void meanTest()
+        {
+            Assert.Equal(5, _.mean(new double[] { 4, 2, 8, 6 }));
+        }
+
+        [Fact]
+        public void minTest()
+        {
+            Assert.Equal(2, _.min(new double[] { 4, 2, 8, 6 }));
+        }
+
     }
 }

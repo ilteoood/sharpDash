@@ -72,6 +72,9 @@ Today I'm supporting just few of its functions, only those that operate on Array
 - ceil
 - divide
 - floor
+- max
+- mean
+- min
 
 ## String:
 - camelCase
