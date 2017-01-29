@@ -529,6 +529,30 @@ namespace sharpDash.Tests
         }
 
         [Fact]
+        public void padTest()
+        {
+            Assert.Equal("  abc   ", _.pad("abc", 8));
+            Assert.Equal("_-abc_-_", _.pad("abc", 8, "_-"));
+            Assert.Equal("abc", _.pad("abc", 3));
+        }
+
+        [Fact]
+        public void padEndTest()
+        {
+            Assert.Equal("abc   ", _.padEnd("abc", 6));
+            Assert.Equal("abc_-_", _.padEnd("abc", 6, "_-"));
+            Assert.Equal("abc", _.padEnd("abc", 3));
+        }
+
+        [Fact]
+        public void padStartTest()
+        {
+            Assert.Equal("   abc", _.padStart("abc", 6));
+            Assert.Equal("_-_abc", _.padStart("abc", 6, "_-"));
+            Assert.Equal("abc", _.padStart("abc", 3));
+        }
+
+        [Fact]
         public void parseIntTest()
         {
             Assert.Equal(8, _.parseInt("08"));

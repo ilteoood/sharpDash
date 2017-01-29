@@ -77,6 +77,9 @@ Today I'm supporting just few of its functions, only those that operate on Array
 - kebabCase
 - lowerCase
 - lowerFirst
+- pad
+- padEnd
+- padStart
 - parseInt
 - repeat
 - replace

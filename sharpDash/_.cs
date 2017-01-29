@@ -450,6 +450,38 @@ namespace sharpDash
             return changeFirstChar(str, false);
         }
 
+        private static String padManager(String str, int length, String chars, bool left, bool right)
+        {
+            int toPad = length - str.Length, padLeft = 0, padRight = 0;
+            if (toPad <= 0)
+                return str;
+            if (left && right)
+            {
+                padLeft = toPad / 2;
+                padRight = toPad - padLeft;
+            }
+            else if (left)
+                padLeft = toPad;
+            else if (right)
+                padRight = toPad;
+            return repeat(chars, padLeft).Substring(0, padLeft) + str + repeat(chars, padRight).Substring(0, padRight);
+        }
+
+        public static String pad(String str = "", int length = 0, String chars = " ")
+        {
+            return padManager(str, length, chars, true, true);
+        }
+
+        public static String padEnd(String str = "", int length = 0, String chars = " ")
+        {
+            return padManager(str, length, chars, false, true);
+        }
+
+        public static String padStart(String str = "", int length = 0, String chars = " ")
+        {
+            return padManager(str, length, chars, true, false);
+        }
+
         public static int parseInt(String str = "", int radix = 10)
         {
             int parsed;
