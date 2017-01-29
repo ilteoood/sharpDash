@@ -500,11 +500,25 @@ namespace sharpDash.Tests
         }
 
         [Fact]
+        public void escapeRegExpTest()
+        {
+            Assert.Equal("\\[lodash\\]\\(https://lodash\\.com/\\)", _.escapeRegExp("[lodash](https://lodash.com/)"));
+        }
+
+        [Fact]
         public void kebabCaseTest()
         {
             Assert.Equal("foo-bar", _.kebabCase("Foo Bar"));
             Assert.Equal("foo-bar", _.kebabCase("--foo-bar--"));
             Assert.Equal("foo-bar", _.kebabCase("__FOO_BAR__"));
+        }
+
+        [Fact]
+        public void lowerCaseTest()
+        {
+            Assert.Equal("foo bar", _.lowerCase("--Foo-Bar--"));
+            Assert.Equal("foo bar", _.lowerCase("fooBar"));
+            Assert.Equal("foo bar", _.lowerCase("__FOO_BAR__"));
         }
 
         [Fact]

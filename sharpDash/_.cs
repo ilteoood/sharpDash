@@ -428,9 +428,21 @@ namespace sharpDash
             return SecurityElement.Escape(str);
         }
 
+        public static String escapeRegExp(String str = "")
+        {
+            foreach (char c in "^$.*+?()[]{}")
+                str = str.Replace("" + c, "\\" + c);
+            return str;
+        }
+
         public static String kebabCase(String str)
         {
             return caseManager(str, "-", false, false);
+        }
+
+        public static String lowerCase(String str = "")
+        {
+            return caseManager(str, " ", false, false);
         }
 
         public static String lowerFirst(String str = "")

@@ -73,7 +73,9 @@ Today I'm supporting just few of its functions, only those that operate on Array
 - deburr
 - endsWith
 - escape
+- escapeRegExp
 - kebabCase
+- lowerCase
 - lowerFirst
 - parseInt
 - repeat
