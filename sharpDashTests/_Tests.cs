@@ -707,5 +707,30 @@ namespace sharpDash.Tests
             Assert.Equal(2, _.min(new double[] { 4, 2, 8, 6 }));
         }
 
+        [Fact]
+        public void multiplyTest()
+        {
+            Assert.Equal(24, _.multiply(6, 4));
+        }
+
+        [Fact]
+        public void roundTest()
+        {
+            Assert.Equal(4, _.round(4.006));
+            Assert.Equal(4.01, _.round(4.006, 2));
+            Assert.Equal(4100, _.round(4060, -2));
+        }
+
+        [Fact]
+        public void subtractTest()
+        {
+            Assert.Equal(2, _.subtract(6, 4));
+        }
+
+        [Fact]
+        public void sumTest()
+        {
+            Assert.Equal(20, _.sum(new double[] { 4, 2, 8, 6 }));
+        }
     }
 }

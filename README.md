@@ -75,6 +75,10 @@ Today I'm supporting just few of its functions, only those that operate on Array
 - max
 - mean
 - min
+- multiply
+- round
+- subtract
+- sum
 
 ## String:
 - camelCase
@@ -96,6 +100,8 @@ Today I'm supporting just few of its functions, only those that operate on Array
 - split
 - startCase
 - startsWith
+- toLower
+- toUpper
 - trim
 - trimEnd
 - trimStart

@@ -563,7 +563,7 @@ namespace sharpDash
             return augend + addend;
         }
 
-        public static double precisionManager(double number, double precisionMultiplier, int toSum)
+        private static double precisionManager(double number, double precisionMultiplier, int toSum)
         {
             return ((int)(number * precisionMultiplier) + toSum) / precisionMultiplier;
         }
@@ -602,6 +602,33 @@ namespace sharpDash
             if (array.Length == 0)
                 return 0;
             return array.Min();
+        }
+
+        public static double multiply(double multiplier, double multiplicand)
+        {
+            return multiplier * multiplicand;
+        }
+
+        public static double round(double number, int precision = 0)
+        {
+            double multiplier = 1;
+            if (precision < 0)
+            {
+                multiplier = Math.Pow(10, precision);
+                number = number * multiplier;
+                precision = 0;
+            }
+            return Math.Round(number, precision) / multiplier;
+        }
+
+        public static double subtract(double minuend, double subtrahend)
+        {
+            return minuend - subtrahend;
+        }
+
+        public static double sum(double[] array)
+        {
+            return array.Sum();
         }
 
     }
