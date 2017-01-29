@@ -558,5 +558,29 @@ namespace sharpDash
             return Regex.Split(str, "(?!" + pattern + ").").Where(elem => elem.Length > 0).ToArray();
         }
 
+        public static double add(double augend, double addend)
+        {
+            return augend + addend;
+        }
+
+        public static double precisionManager(double number, double precisionMultiplier, int toSum)
+        {
+            return ((int)(number * precisionMultiplier) + toSum) / precisionMultiplier;
+        }
+
+        public static double ceil(double number, int precision = 0)
+        {
+            return precisionManager(number, Math.Pow(10, precision), 1);
+        }
+
+        public static double divide(double dividend, double divisor)
+        {
+            return dividend / divisor;
+        }
+
+        public static double floor(double number, int precision = 0)
+        {
+            return precisionManager(number, Math.Pow(10, precision), 0);
+        }
     }
 }

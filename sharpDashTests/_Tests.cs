@@ -660,5 +660,33 @@ namespace sharpDash.Tests
             Assert.Equal(new String[] { "fred", "barney", "&", "pebbles" }, _.words("fred, barney, & pebbles", "[^, ]+"));
         }
 
+        [Fact]
+        public void addTest()
+        {
+            Assert.Equal(10, _.add(6, 4));
+        }
+
+        [Fact]
+        public void ceilTest()
+        {
+            Assert.Equal(5, _.ceil(4.006));
+            Assert.Equal(6.01, _.ceil(6.004, 2));
+            Assert.Equal(6100, _.ceil(6040, -2));
+        }
+
+        [Fact]
+        public void divideTest()
+        {
+            Assert.Equal(1.5, _.divide(6, 4));
+        }
+
+        [Fact]
+        public void floorTest()
+        {
+            Assert.Equal(4, _.floor(4.006));
+            Assert.Equal(0.04, _.floor(0.046, 2));
+            Assert.Equal(4000, _.floor(4060, -2));
+        }
+
     }
 }

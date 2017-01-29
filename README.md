@@ -67,6 +67,12 @@ Today I'm supporting just few of its functions, only those that operate on Array
 - inRange
 - random
 
+## Math:
+- add
+- ceil
+- divide
+- floor
+
 ## String:
 - camelCase
 - capitalize
