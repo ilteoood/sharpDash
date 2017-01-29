@@ -531,9 +531,16 @@ namespace sharpDash
 
         public static String trim(String str, String chars=" ")
         {
-            foreach (char c in chars)
-                str = str.Replace(c + "", "");
-            return str;
+            return str.Trim(chars.ToArray());
+        }
+
+        public static String trimEnd(String str, String chars = " ")
+        {
+            return str.TrimEnd(chars.ToArray());
+        }
+        public static String trimStart(String str, String chars = " ")
+        {
+            return str.TrimStart(chars.ToArray());
         }
 
         public static String upperCase(String str = "")

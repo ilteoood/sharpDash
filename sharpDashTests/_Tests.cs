@@ -625,6 +625,20 @@ namespace sharpDash.Tests
         }
 
         [Fact]
+        public void trimEndTest()
+        {
+            Assert.Equal("   abc", _.trimEnd("   abc   "));
+            Assert.Equal("-_-abc", _.trimEnd("-_-abc-_-", "_-"));
+        }
+
+        [Fact]
+        public void trimStartTest()
+        {
+            Assert.Equal("abc   ", _.trimStart("   abc   "));
+            Assert.Equal("abc-_-", _.trimStart("-_-abc-_-", "_-"));
+        }
+
+        [Fact]
         public void upperCaseTest()
         {
             Assert.Equal("FOO BAR", _.upperCase("--foo-bar"));

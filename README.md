@@ -88,6 +88,8 @@ Today I'm supporting just few of its functions, only those that operate on Array
 - startCase
 - startsWith
 - trim
+- trimEnd
+- trimStart
 - upperCase
 - upperFirst
 - words
