@@ -651,5 +651,15 @@ namespace sharpDash
             return value is Array;
         }
 
+        public static bool isBoolean(Object value)
+        {
+            return value is Boolean;
+        }
+
+        public static bool isDate(Object value)
+        {
+            return value is DateTime;
+        }
+
     }
 }

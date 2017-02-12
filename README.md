@@ -114,7 +114,8 @@ Today I'm supporting just few of its functions, only those that operate on Array
 - gt
 - gte
 - isArray
-
+- isBoolean
+- isDate
 
 More functions will be added in future.
 

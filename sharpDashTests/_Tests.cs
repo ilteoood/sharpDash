@@ -766,5 +766,19 @@ namespace sharpDash.Tests
             Assert.True(_.isArray(new int[] { 1, 2, 3 }));
             Assert.False(_.isArray("abc"));
         }
+
+        [Fact]
+        public void isBooleanTest()
+        {
+            Assert.True(_.isBoolean(false));
+            Assert.False(_.isBoolean(null));
+        }
+
+        [Fact]
+        public void isDateTest()
+        {
+            Assert.True(_.isDate(new DateTime()));
+            Assert.False(_.isDate("Mon April 23 2012"));
+        }
     }
 }
