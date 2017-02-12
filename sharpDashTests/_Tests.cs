@@ -732,5 +732,39 @@ namespace sharpDash.Tests
         {
             Assert.Equal(20, _.sum(new double[] { 4, 2, 8, 6 }));
         }
+
+        [Fact]
+        public void castArrayTest()
+        {
+            Assert.Equal(new int[] { 1 }, _.castArray<int>(1));
+            var temp = new { a = 1 };
+            Assert.Equal(new dynamic[] { temp }, _.castArray<dynamic>(temp));
+            Assert.Equal(new String[] { "abc" }, _.castArray<String>("abc"));
+            Assert.Equal(new Object[] { null }, _.castArray<Object>(null));
+            Assert.Equal(new String[] { "abc" }, _.castArray<String>(new String[] { "abc" }));
+        }
+
+        [Fact]
+        public void gtTest()
+        {
+            Assert.True(_.gt(3, 1));
+            Assert.False(_.gt(3, 3));
+            Assert.False(_.gt(1, 3));
+        }
+
+        [Fact]
+        public void gteTest()
+        {
+            Assert.True(_.gte(3, 1));
+            Assert.True(_.gte(3, 3));
+            Assert.False(_.gte(1, 3));
+        }
+
+        [Fact]
+        public void isArrayTest()
+        {
+            Assert.True(_.isArray(new int[] { 1, 2, 3 }));
+            Assert.False(_.isArray("abc"));
+        }
     }
 }

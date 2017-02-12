@@ -109,6 +109,12 @@ Today I'm supporting just few of its functions, only those that operate on Array
 - upperFirst
 - words
 
+## Lang:
+- castArray
+- gt
+- gte
+- isArray
+
 
 More functions will be added in future.
 

@@ -14,7 +14,7 @@ namespace sharpDash
     {
         public static T[][] chunk<T>(IList<T> array, int size = 1)
         {
-            int matrixSize = (array.Count - 1)/ size + 1;
+            int matrixSize = (array.Count - 1) / size + 1;
             T[][] toReturn = new T[matrixSize][];
             for (int i = 0; i < matrixSize; i++)
                 toReturn[i] = array.Skip(i * size).Take(size).ToArray();
@@ -41,8 +41,8 @@ namespace sharpDash
         {
             IEnumerable<T> excludeIterated = values.Select(element => iteratee(element));
             return (from check in array
-                            where !excludeIterated.Contains(iteratee(check))
-                            select check).ToArray();
+                    where !excludeIterated.Contains(iteratee(check))
+                    select check).ToArray();
         }
 
         public static T[] drop<T>(T[] array, int n = 1)
@@ -60,7 +60,7 @@ namespace sharpDash
             return array.Reverse().Where(element => predicate(element)).Reverse().ToArray();
         }
 
-        public static T[] fill<T>(T[] array, T value, int start = 0, int end=-1)
+        public static T[] fill<T>(T[] array, T value, int start = 0, int end = -1)
         {
             if (end == -1)
                 end = array.Length;
@@ -92,7 +92,7 @@ namespace sharpDash
             return flatterMethod(array, 999);
         }
 
-        public static T[] flattenDepth<T>(T[] array, int depth=1)
+        public static T[] flattenDepth<T>(T[] array, int depth = 1)
         {
             return flatterMethod(array, depth);
         }
@@ -152,7 +152,7 @@ namespace sharpDash
             return whereToSearch.ToList<T>().FindLastIndex(element => element.Equals(value));
         }
 
-        public static T nth<T>(T[] array, int n=0)
+        public static T nth<T>(T[] array, int n = 0)
         {
             if (n < 0)
                 n = array.Length + n;
@@ -161,7 +161,7 @@ namespace sharpDash
 
         public static T[] pull<T>(ref T[] array, params T[] values)
         {
-            foreach(T arg in values)
+            foreach (T arg in values)
                 array = difference(array, new T[] { arg });
             return array;
         }
@@ -199,7 +199,7 @@ namespace sharpDash
         {
             if (end == -1)
                 end = array.Length;
-            return array.Skip(start).Take(end-start).ToArray();
+            return array.Skip(start).Take(end - start).ToArray();
         }
 
         public static int sortedIndex(int[] array, int value)
@@ -236,7 +236,7 @@ namespace sharpDash
             return array.Skip(1).ToArray();
         }
 
-        public static T[] take<T>(T[] array, int n=1)
+        public static T[] take<T>(T[] array, int n = 1)
         {
             return array.Take(n).ToArray();
         }
@@ -249,24 +249,24 @@ namespace sharpDash
         public static T[] union<T>(params T[][] arrays)
         {
             IEnumerable<T> temp = new List<T>();
-            foreach(T[] union in arrays)
+            foreach (T[] union in arrays)
                 temp = temp.Union(union);
             return temp.ToArray();
         }
 
-        public static T[] unionBy<T>(Func<T,T> iteratee, params T[][] arrays)
+        public static T[] unionBy<T>(Func<T, T> iteratee, params T[][] arrays)
         {
             T[] tempArray = arrays[0];
             IEnumerable<T> temp = arrays[0].Select(element => iteratee(element));
             return tempArray.Concat(from unionArray in arrays.Skip(1)
-                        from union in unionArray
-                        where !temp.Contains(iteratee(union))
-                        select union).ToArray();
+                                    from union in unionArray
+                                    where !temp.Contains(iteratee(union))
+                                    select union).ToArray();
         }
 
         public static T[] without<T>(T[] array, params T[] values)
         {
-            T[] copy = (T[]) array.Clone();
+            T[] copy = (T[])array.Clone();
             return pullAll(ref copy, values);
         }
 
@@ -275,7 +275,7 @@ namespace sharpDash
             return difference(union(arrays), intersection(arrays));
         }
 
-        public static T[] xorBy<T>(Func<T,T> iteratee, params T[][] arrays)
+        public static T[] xorBy<T>(Func<T, T> iteratee, params T[][] arrays)
         {
             return difference(unionBy(iteratee, arrays), intersectionBy(iteratee, arrays));
         }
@@ -295,7 +295,7 @@ namespace sharpDash
             return zip(arrays);
         }
 
-        public static Dictionary<TKey,TValue> zipObject<TKey, TValue>(TKey[] props, TValue[] values)
+        public static Dictionary<TKey, TValue> zipObject<TKey, TValue>(TKey[] props, TValue[] values)
         {
             Dictionary<TKey, TValue> toReturn = new Dictionary<TKey, TValue>();
             for (int i = 0; i < props.Length; i++)
@@ -360,7 +360,7 @@ namespace sharpDash
 
         public static bool inRange(double number, double end, double start = 0)
         {
-            if(end < start)
+            if (end < start)
             {
                 end = end * start;
                 start = end / start;
@@ -396,7 +396,7 @@ namespace sharpDash
             return toReturn;
         }
 
-        public static String camelCase(String str= "")
+        public static String camelCase(String str = "")
         {
             return caseManager(str, "", false, true);
         }
@@ -509,7 +509,7 @@ namespace sharpDash
             return str.Split(separator.ToCharArray()).Take(limit).ToArray();
         }
 
-        public static String startCase(String str="")
+        public static String startCase(String str = "")
         {
             return caseManager(str, " ", true, true);
         }
@@ -529,7 +529,7 @@ namespace sharpDash
             return str.ToUpper();
         }
 
-        public static String trim(String str, String chars=" ")
+        public static String trim(String str, String chars = " ")
         {
             return str.Trim(chars.ToArray());
         }
@@ -629,6 +629,26 @@ namespace sharpDash
         public static double sum(double[] array)
         {
             return array.Sum();
+        }
+
+        public static T[] castArray<T>(Object value)
+        {
+            return value is Array ? (T[]) value : new T[] { (T) value };
+        }
+
+        public static bool gt(Double value, Double other)
+        {
+            return value > other;
+        }
+
+        public static bool gte(Double value, Double other)
+        {
+            return value >= other;
+        }
+
+        public static bool isArray(Object value)
+        {
+            return value is Array;
         }
 
     }
